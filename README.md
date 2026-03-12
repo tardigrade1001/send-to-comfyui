@@ -1,18 +1,24 @@
 # 🚀 Send to ComfyUI
 
-A simple but powerful **browser extension + custom ComfyUI node** that creates a direct **Web → ComfyUI pipeline**.
+![GitHub stars](https://img.shields.io/github/stars/tardigrade1001/send-to-comfyui?style=social)
+![GitHub license](https://img.shields.io/github/license/tardigrade1001/send-to-comfyui)
+![ComfyUI](https://img.shields.io/badge/ComfyUI-Tested%20on%200.16.3-blue)
 
-Instead of manually downloading images and loading them into ComfyUI, you can send them directly from your browser with a single right-click.
+**Send images from the web directly into a ComfyUI workflow with a single right-click.**
+
+**Send to ComfyUI** is a lightweight **browser extension + custom ComfyUI node** that creates a seamless **Web → ComfyUI pipeline**.
+
+Instead of manually downloading images and loading them into ComfyUI, you can send them directly from your browser.
 
 No more:
 
-**Image → Drag and drop into a Load Image node → Click Run**
+**Image → Download → Drag into Load Image → Click Run**
 
 Now it's simply:
 
 **Right-Click → Send to ComfyUI ✨**
 
-And if **Auto-Run** is enabled:
+And with **Auto-Run enabled**:
 
 **Right-Click → Send → Workflow runs automatically 🚀**
 
@@ -24,9 +30,11 @@ And if **Auto-Run** is enabled:
   <img src="assets/demo.gif" width="800">
 </p>
 
+Example: Right-click an image on the web and instantly send it into a running ComfyUI workflow.
+
 ---
 
-## 🌐 What This Tool Does
+# 🌐 What This Tool Does
 
 When browsing the web, you often encounter images you want to experiment with inside ComfyUI.
 
@@ -39,7 +47,7 @@ Normally the process looks like this:
 
 This extension removes that entire cycle.
 
-With **Send to ComfyUI**, images move directly from the browser into your ComfyUI workflow.
+With **Send to ComfyUI**, images move directly from the browser into your workflow.
 
 ### New Workflow
 
@@ -66,7 +74,7 @@ This project consists of two components:
 • A **browser extension**
 • A **custom ComfyUI node**
 
-Together they create a seamless bridge between the web and your ComfyUI workflows.
+Together they create a seamless bridge between the internet and your AI workflows.
 
 ---
 
@@ -95,7 +103,7 @@ Each image receives a unique timestamp filename such as:
 web_image_1710243800.png
 ```
 
-This guarantees that the newest image can always be detected.
+This guarantees the newest file can always be detected by the workflow.
 
 ---
 
@@ -103,15 +111,15 @@ This guarantees that the newest image can always be detected.
 
 The included **Load Latest Image** node automatically loads the newest image from the `input` folder.
 
-Instead of manually selecting files, the node scans the folder and loads the most recent image.
+Instead of manually selecting files, the node scans the directory and loads the most recent image.
 
-It works by:
+The node:
 
-• detecting the newest file in the input directory
-• converting it to a ComfyUI image tensor
-• automatically triggering workflow updates
+• detects the newest file in the input folder
+• converts the image into a ComfyUI-compatible tensor
+• triggers workflow updates automatically
 
-The node uses ComfyUI’s **IS_CHANGED mechanism**, ensuring the workflow refreshes whenever a new image appears.
+It uses ComfyUI’s **IS_CHANGED mechanism**, ensuring the workflow refreshes whenever a new image appears.
 
 ---
 
@@ -136,7 +144,7 @@ Right-Click Image
 
 This works through a small script injected into the active ComfyUI tab that simulates clicking the **Run / Queue Prompt** button.
 
-This approach keeps the execution visible inside the ComfyUI interface, allowing you to see:
+This keeps execution visible inside the ComfyUI interface so you can still see:
 
 • nodes lighting up
 • progress bars
@@ -148,7 +156,7 @@ This approach keeps the execution visible inside the ComfyUI interface, allowing
 
 The extension provides feedback directly on the webpage using toast notifications.
 
-Examples include:
+Examples:
 
 ✅ **Sent to ComfyUI!**
 🚀 **Sent & Auto-Queued!**
@@ -160,7 +168,7 @@ These notifications confirm whether the transfer succeeded.
 
 # 🖼️ Image Handling
 
-Images downloaded from the web often include orientation metadata.
+Images downloaded from the web often contain orientation metadata.
 
 The custom node automatically:
 
@@ -194,17 +202,17 @@ The extension uses the following Chrome APIs:
 • `contextMenus` — adds the **Send to ComfyUI** right-click option
 • `tabs` — locates the active ComfyUI tab for Auto-Run
 • `scripting` — simulates clicking the Run button
-• `storage` — stores the Auto-Run preference
+• `storage` — saves the Auto-Run preference
 • `declarativeNetRequest` — allows requests to the local ComfyUI server
 
 ---
 
 ## 2️⃣ Install the Custom Node
 
-Copy the node files into:
+Clone or copy this repository into:
 
 ```
-ComfyUI/custom_nodes/
+ComfyUI/custom_nodes/send-to-comfyui/
 ```
 
 Restart ComfyUI.
@@ -215,9 +223,9 @@ You should now see a node called:
 
 ---
 
-## ⚙️ Configuration
+# ⚙️ Configuration
 
-**Note:** The extension assumes your ComfyUI server is running at the default address:
+The extension assumes your ComfyUI server is running at the default address:
 
 ```
 http://127.0.0.1:8188
@@ -234,7 +242,7 @@ popup.js
 
 # 🧪 Example Workflow
 
-A minimal workflow might look like:
+A minimal pipeline might look like:
 
 ```
 Load Latest Image
@@ -244,7 +252,7 @@ Preview Image
 Caption / Generation Node
 ```
 
-Any image sent from the browser will immediately appear in the workflow.
+Any image sent from your browser will immediately appear in the workflow.
 
 ---
 
@@ -254,23 +262,28 @@ Any image sent from the browser will immediately appear in the workflow.
 • ComfyUI running locally
 • Default port `8188`
 
+**Tested with:**
+
+• ComfyUI **0.16.3**
+• ComfyUI Frontend **1.39.19**
+
 ---
 
 # 💡 Example Use Cases
 
-This tool is useful for many workflows:
+This tool can support many workflows:
 
 🧠 Caption generation
 🎨 Image-to-image experimentation
-📚 Dataset collection
-🔍 Reference image gathering
-⚙️ Rapid pipeline testing
+📚 Dataset creation
+🔍 Reference image collection
+⚙️ Rapid AI workflow prototyping
 
 ---
 
 # 🔮 Possible Future Improvements
 
-Potential future ideas include:
+Potential ideas for extending this tool:
 
 • automatic workflow selection
 • batch image sending
@@ -282,11 +295,11 @@ Potential future ideas include:
 
 # ❤️ Why This Exists
 
-Working with reference images should be effortless.
+Working with reference images should feel effortless.
 
-Instead of constantly downloading files and manually loading them into nodes, this tool turns the internet into a **live image source for ComfyUI**.
+Instead of constantly downloading files and manually loading them into nodes, this project turns the internet into a **live input source for ComfyUI**.
 
-Right-Click → Send → Experiment.
+Right-Click → Send → Create.
 
 ---
 
@@ -304,8 +317,8 @@ MIT License
 
 ---
 
-# 🚀 Enjoy!
+# ⭐ Enjoy!
 
-If you build interesting workflows with this tool, feel free to extend it further.
+If you build interesting workflows using this tool, feel free to extend it further.
 
 The bridge between the web and ComfyUI opens up many creative possibilities.
