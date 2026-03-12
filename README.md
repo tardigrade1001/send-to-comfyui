@@ -20,7 +20,9 @@ And if **Auto-Run** is enabled:
 
 ## 🎬 Demo
 
-<video src="assets/demo.mp4" controls width="800"></video>
+<p align="center">
+  <img src="assets/demo.gif" width="800">
+</p>
 
 ---
 
