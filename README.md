@@ -54,7 +54,7 @@ With **Send to ComfyUI**, images move directly from the browser into your workfl
 Web Image
 → **Send to ComfyUI**
 → Image appears in `ComfyUI/input`
-→ Workflow loads the newest image
+→ Workflow loads the image via a Smart Queue
 
 Or with **Auto-Run enabled**:
 
@@ -93,33 +93,33 @@ When selected, the extension:
 
 The image is automatically saved inside:
 
-```
+```text
 ComfyUI/input/
+
 ```
 
 Each image receives a unique timestamp filename such as:
 
-```
+```text
 web_image_1710243800.png
+
 ```
 
 This guarantees the newest file can always be detected by the workflow.
 
 ---
 
-# 🤖 Custom ComfyUI Node
+# 🤖 Custom ComfyUI Node (Smart FIFO Queue)
 
-The included **Load Latest Image** node automatically loads the newest image from the `input` folder.
-
-Instead of manually selecting files, the node scans the directory and loads the most recent image.
+The included **Load Image Queue (FIFO)** node is designed specifically for automated pipelines. Instead of just blindly grabbing the newest file in your folder, it acts as a smart queue.
 
 The node:
 
-• detects the newest file in the input folder
-• converts the image into a ComfyUI-compatible tensor
-• triggers workflow updates automatically
+• **Tracks Sessions:** It records exactly when ComfyUI starts, ignoring all your old images from previous sessions.
+• **Processes in Order (FIFO):** If you rapidly send 3 images from your browser, it lines them up and processes them in the exact order they arrived (Image 1 → Image 2 → Image 3) without skipping any.
+• **Graceful Fallback:** If the queue is empty, it acts like a normal node and simply loads the newest image in your input folder so manual workflows never break.
 
-It uses ComfyUI’s **IS_CHANGED mechanism**, ensuring the workflow refreshes whenever a new image appears.
+It uses ComfyUI’s **IS_CHANGED mechanism** to pass the exact queued file to the engine, ensuring the workflow refreshes perfectly whenever a new image arrives.
 
 ---
 
@@ -187,8 +187,9 @@ This ensures compatibility with ComfyUI’s internal image format.
 
 Open your browser and navigate to:
 
-```
+```text
 chrome://extensions
+
 ```
 
 Enable **Developer Mode**.
@@ -211,15 +212,16 @@ The extension uses the following Chrome APIs:
 
 Clone or copy this repository into:
 
-```
+```text
 ComfyUI/custom_nodes/send-to-comfyui/
+
 ```
 
 Restart ComfyUI.
 
 You should now see a node called:
 
-**Load Latest Image**
+**Load Image Queue (FIFO)**
 
 ---
 
@@ -227,15 +229,17 @@ You should now see a node called:
 
 The extension assumes your ComfyUI server is running at the default address:
 
-```
-http://127.0.0.1:8188
+```text
+[http://127.0.0.1:8188](http://127.0.0.1:8188)
+
 ```
 
 If your ComfyUI instance uses a different port or address, update the endpoint inside:
 
-```
+```text
 background.js
 popup.js
+
 ```
 
 ---
@@ -244,15 +248,16 @@ popup.js
 
 A minimal pipeline might look like:
 
-```
-Load Latest Image
+```text
+Load Image Queue (FIFO)
         ↓
 Preview Image
         ↓
 Caption / Generation Node
+
 ```
 
-Any image sent from your browser will immediately appear in the workflow.
+Any image sent from your browser will immediately queue up and appear in the workflow.
 
 ---
 
