@@ -5,22 +5,22 @@
   <style>
     body { width: 240px; padding: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f9f9f9; margin: 0; }
     h3 { margin-top: 0; color: #333; margin-bottom: 15px; }
-    
+
     #runBtn { width: 100%; padding: 16px; cursor: pointer; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; background-color: #4CAF50; color: white; transition: background-color 0.2s; }
     #runBtn:hover { background-color: #45a049; }
-    
+    #runBtn:disabled { background-color: #ccc; cursor: not-allowed; }
+
     #statusMsg { margin-top: 15px; font-size: 13px; color: #555; font-weight: bold; min-height: 18px; }
 
-    /* Auto-Run Toggle Styles */
     .toggle-container { margin-top: 15px; text-align: left; background: #eee; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
     .toggle-label { font-size: 14px; cursor: pointer; display: flex; align-items: center; color: #333; }
-    .toggle-checkbox { margin-right: 8px; cursor: pointer; width: 16px; height: 16px; }
+    .toggle-checkbox { margin-right: 8px; cursor: pointer; width: 16px; height: 16px; flex-shrink: 0; }
     .toggle-desc { font-size: 11px; color: #666; margin-top: 4px; margin-left: 24px; line-height: 1.3; }
   </style>
 </head>
 <body>
   <h3>ComfyUI Remote</h3>
-  
+
   <button id="runBtn">&#9654; Run Open Tab</button>
   <div id="statusMsg">Ready.</div>
 
